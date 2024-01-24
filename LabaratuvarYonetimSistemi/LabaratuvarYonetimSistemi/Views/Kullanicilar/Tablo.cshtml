@@ -1,0 +1,67 @@
+﻿@model List<LabaratuvarYonetimSistemi.Models.Kullanici>
+@{
+    var liste = ViewBag.liste as List<LabaratuvarYonetimSistemi.Models.Kullanici>;
+    int sayac = 1;
+}
+<div class="col-12">
+    <div class="card">
+        <div class="card-header" style="background-color:#1dadb6">
+            <p class="card-title"><b>Kullanıcı Listesi</b></p>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Kullanıcı Adı</th>
+                        <th>Adı</th>
+                        <th>Soyadı</th>
+                        <th>Kurum Sicil No</th>
+                        <th>E posta</th>
+                        <th>Telefon</th>
+                        <th>Kullanıcı Türü</th>
+                        <th>Aktif</th>
+                        <th>İşlem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        string renk = "#ffff";
+                        if (!item.Aktif) { renk = "#ffefd5"; }
+                        <tr style="background-color:@renk">
+                            <th>@sayac</th>
+                            <td>@item.KullaniciAd</td>
+                            <td>@item.Ad</td>
+                            <td>@item.Soyad</td>
+                            <td>@item.SicilNo</td>
+                            <td>@item.Eposta</td>
+                            <td>@item.Telefon</td>
+                            <td>@item.KullaniciTuru</td>
+                            @if (item.Aktif)
+                            {
+                                <td><a href="/Kullanicilar/AktiflikAyari/@item.KullaniciID"><input type="checkbox" name="Aktif" value="true" checked data-bootstrap-switch></a></td>
+                            }
+                            else
+                            {
+                                <td><a href="/Kullanicilar/AktiflikAyari/@item.KullaniciID"><input type="checkbox" name="Aktif" value="true" data-bootstrap-switch></a></td>
+                            }
+                            <td>
+                                <a href="/Kullanicilar/Sil" id="@item.KullaniciID" onclick=" return DeleteRow(@item.KullaniciID) == true;"><span class="badge bg-danger">Sil</span></a>
+                                <a><span class="badge bg-warning">Düzenle</span></a>
+
+                            </td>
+                        </tr>
+                        sayac++;
+                    }
+
+
+
+
+            </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</div>

@@ -1,0 +1,92 @@
+﻿<!-- /.row -->
+
+<div class="col-4">
+    <div class="card">
+        <div class="card-header"  style="background-color:#f59a2b" onclick="AcKapa2()">
+            <p class="card-title"><b>Ara</b></p>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body" id="body2">
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>Kullanıcı Adı</label>
+                        <input type="text" class="form-control">
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>Kullanıcı Parolası</label>
+                        <input type="text" class="form-control">
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>Adı</label>
+                        <input type="text" class="form-control">
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>Soyadı</label>
+                        <input type="text" class="form-control">
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>Kurum Sicil Numarası</label>
+                        <input type="text" class="form-control">
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>Telefon</label>
+                        <input type="text" class="form-control">
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>Kullanıcı Türü</label>
+                        <select class="form-control select2" style="width: 100%;">
+                            <option value="1">Teknik Destek</option>
+                            <option value="2">Otomasyon Yöneticisi</option>
+                            <option value="3">Operatör</option>
+                        </select>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>Aktif</label>
+                        <br />
+                        <input type="checkbox" name="g" checked data-bootstrap-switch>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer info">
+                <button class="btn btn-app btn-info">
+                    <i class="fas fa-search"></i> Ara
+                </button>
+            </div>
+
+        </div>
+       
+        <!-- /.card -->
+    </div>
+</div>
+
+<script>
+    function AcKapa2() {
+        $("#body2").animate({
+            height: 'toggle'
+        });
+    }
+</script>
