@@ -27,7 +27,7 @@
                         //console.log($('#' + id).parent('div').parent('div'));
                         //console.log($('#' + id).parent('li').parent('ul').parent('div').parent('div'));
                         //$('#' + id).parent('div').parent('div').remove();
-                        $('#' + id).parent('div').parent('button').parent('div').remove();
+                        //$('#' + id).parent('div').parent('button').parent('div').remove();
                     }
                     else {
                         Swal.fire({

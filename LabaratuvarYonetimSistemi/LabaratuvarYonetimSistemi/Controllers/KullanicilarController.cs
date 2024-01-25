@@ -17,8 +17,14 @@ namespace LabaratuvarYonetimSistemi.Controllers
         Ziyaretci_Log Ziyaretci_Log = new Ziyaretci_Log();
         public ActionResult Index()
         {
+            Session["tur"] = 1;
+            Session["name"] = "oğuzhan";
 
-
+            //if (Session["id"] == null) return RedirectToAction("Giris");
+            return View();
+        }
+        public ActionResult IndexAra()
+        {
             Session["tur"] = 1;
             Session["name"] = "oğuzhan";
 
@@ -77,6 +83,11 @@ namespace LabaratuvarYonetimSistemi.Controllers
         {
             return PartialView();
         }
+        public PartialViewResult FormKullaniciDuzenle()
+        {
+            var kullaniciListesi = db.Kullanici.ToList();
+            return PartialView(kullaniciListesi);
+        }
         public PartialViewResult Ara()
         {
             return PartialView();
@@ -84,8 +95,12 @@ namespace LabaratuvarYonetimSistemi.Controllers
         public PartialViewResult Tablo()
         {
             var kullaniciListesi = db.Kullanici.ToList();
-            ViewBag.liste = kullaniciListesi;
             return PartialView(kullaniciListesi);
+        }
+        public PartialViewResult TabloAra()
+        {
+
+            return PartialView();
         }
 
 
@@ -104,6 +119,67 @@ namespace LabaratuvarYonetimSistemi.Controllers
             TempData["message"] = "İşlem Başarılı";
             TempData["icon"] = "success";
             return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public ActionResult KullaniciGuncelle(Kullanici p)
+        {
+            string bilgisayarAdi = Dns.GetHostName();
+            string ipAdresi = Dns.GetHostByName(bilgisayarAdi).AddressList[0].ToString();
+            var gelenKayit = db.Kullanici.Find(p.KullaniciID);
+            gelenKayit.KullaniciAd = p.KullaniciAd;
+            gelenKayit.Ad = p.Ad;
+            gelenKayit.Soyad = p.Soyad;
+            gelenKayit.SicilNo = p.SicilNo;
+            gelenKayit.Eposta = p.Eposta;
+            gelenKayit.Telefon = p.Telefon;
+            gelenKayit.KullaniciTuru = p.KullaniciTuru;
+            gelenKayit.Aktif = p.Aktif;
+            gelenKayit.GuncellemeZamani = DateTime.Now.ToString();
+            gelenKayit.GuncelleyenIP = ipAdresi;
+            gelenKayit.GuncelleyenBilgisi = Session["id"].ToString() + " - " + Session["name"] + " " + Session["soyad"];
+            db.SaveChanges();
+            TempData["message"] = "İşlem Başarılı";
+            TempData["icon"] = "success";
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Sil(int id)
+        {
+            var gelenKayit = db.Kullanici.Find(id);
+            db.Kullanici.Remove(gelenKayit);
+            db.SaveChanges();
+            TempData["message"] = "İşlem Başarılı";
+            TempData["icon"] = "success";
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public ActionResult KullaniciAra(Kullanici p)
+        {
+            if (p.KullaniciAd == null) p.KullaniciAd = "";
+            if (p.Ad == null) p.Ad = "";
+            if (p.Soyad == null) p.Soyad = "";
+            if (p.SicilNo == null) p.SicilNo = "";
+            if (p.Eposta == null) p.Eposta = "";
+            if (p.Telefon == null) p.Telefon = "";
+            var kullanicilar = db.Kullanici.ToList();
+            List<Kullanici> arananListe = new List<Kullanici>();
+            if (p.KullaniciTuru != 0)
+                arananListe = kullanicilar.Where(i => i.KullaniciAd.Contains(p.KullaniciAd) && i.Ad.Contains(p.Ad) &&
+                i.Soyad.Contains(p.Soyad) && i.SicilNo.Contains(p.SicilNo) &&
+                i.Eposta.Contains(p.Eposta) && i.Telefon.Contains(p.Telefon) && i.KullaniciTuru == p.KullaniciTuru
+                && i.Aktif == p.Aktif).ToList();
+            else
+                arananListe = kullanicilar.Where(i => i.KullaniciAd.Contains(p.KullaniciAd) && i.Ad.Contains(p.Ad) &&
+                i.Soyad.Contains(p.Soyad) && i.SicilNo.Contains(p.SicilNo) &&
+                i.Eposta.Contains(p.Eposta) && i.Telefon.Contains(p.Telefon)
+                && i.Aktif == p.Aktif).ToList();
+
+
+            
+            TempData["liste"] = arananListe;
+            TempData["model"] = p;
+            return RedirectToAction("IndexAra");
         }
 
         public ActionResult AktiflikAyari(int id)

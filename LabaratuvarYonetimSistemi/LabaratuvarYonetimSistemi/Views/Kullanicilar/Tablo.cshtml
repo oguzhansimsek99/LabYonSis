@@ -1,6 +1,6 @@
 ﻿@model List<LabaratuvarYonetimSistemi.Models.Kullanici>
 @{
-    var liste = ViewBag.liste as List<LabaratuvarYonetimSistemi.Models.Kullanici>;
+    
     int sayac = 1;
 }
 <div class="col-12">
@@ -49,7 +49,7 @@
                             }
                             <td>
                                 <a href="/Kullanicilar/Sil" id="@item.KullaniciID" onclick=" return DeleteRow(@item.KullaniciID) == true;"><span class="badge bg-danger">Sil</span></a>
-                                <a><span class="badge bg-warning">Düzenle</span></a>
+                                <a style="cursor:pointer" onclick="divAc('#col_DuzenleKullanici-@item.KullaniciID')"><span class="badge bg-warning">Düzenle</span></a>
 
                             </td>
                         </tr>
@@ -65,3 +65,13 @@
     </div>
     <!-- /.card -->
 </div>
+
+<script>
+
+    function divAc(div) {
+        $(".mainClass").hide();
+        //$("#col_YeniKullanici").hide();
+        $(div).show();
+        $("html,body").stop().animate({ scrollTop: "0" }, 500);
+    }
+</script>

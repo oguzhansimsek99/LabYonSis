@@ -58,7 +58,10 @@
         <div class="container-fluid">
             <div class="row">
                 @if (int.Parse(Session["tur"].ToString()) == 1 || int.Parse(Session["tur"].ToString()) == 2)
-                {@Html.Action("FormKullanici", "Kullanicilar")}
+                {
+                    @Html.Action("FormKullanici", "Kullanicilar")
+                    @Html.Action("FormKullaniciDuzenle", "Kullanicilar")
+                }
 
 
                 @Html.Action("Ara", "Kullanicilar")

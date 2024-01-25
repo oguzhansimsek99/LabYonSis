@@ -1,0 +1,134 @@
+﻿@model List<LabaratuvarYonetimSistemi.Models.Kullanici>
+
+
+@foreach (var item in Model)
+{
+    <div class="col-8 mainClass" id="col_DuzenleKullanici-@item.KullaniciID" style="display:none">
+        <form method="post" action="/Kullanicilar/KullaniciGuncelle">
+            <input type="hidden" class="form-control" name="KullaniciID" value="@item.KullaniciID">
+            <div class="card">
+                <div class="card-header" style="background-color:#85e52f" onclick="AcKapa3('#bodyDuzen-@item.KullaniciID')">
+                    <p class="card-title"><b>Kullanıcı Güncelle</b></p>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body" id="bodyDuzen-@item.KullaniciID">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>Kullanıcı Adı</label>
+                                <input type="text" class="form-control" name="KullaniciAd" required value="@item.KullaniciAd">
+                                <!-- /.card-body -->
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>Kullanıcı Parolası</label>
+                                <input type="text" class="form-control" name="KullaniciParolasi" >
+                                <!-- /.card-body -->
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>Adı</label>
+                                <input type="text" class="form-control" name="Ad" required value="@item.Ad">
+                                <!-- /.card-body -->
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>Soyadı</label>
+                                <input type="text" class="form-control" name="Soyad" required value="@item.Soyad">
+                                <!-- /.card-body -->
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>Kurum Sicil Numarası</label>
+                                <input type="text" class="form-control" name="SicilNo" required value="@item.SicilNo">
+                                <!-- /.card-body -->
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>E posta</label>
+                                <input type="email" class="form-control" name="Eposta" required value="@item.Eposta">
+                                <!-- /.card-body -->
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>Telefon</label>
+                                <input type="text" class="form-control" name="Telefon" maxlength="11" value="@item.Telefon">
+                                <!-- /.card-body -->
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>Kullanıcı Türü</label>
+                                <select class="form-control select2" style="width: 100%;" name="KullaniciTuru" id="kullaniciTur-@item.KullaniciID">
+                                    <option value="1">Teknik Destek</option>
+                                    <option value="2">Otomasyon Yöneticisi</option>
+                                    <option value="3">Operatör</option>
+                                </select>
+                                <!-- /.card-body -->
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>Aktif</label>
+                                <br />
+                                @if (item.Aktif)
+                                {
+                                    <input type="checkbox" name="Aktif" value="true" checked data-bootstrap-switch>
+                                }
+                                else
+                                {
+                                    <input type="checkbox" name="Aktif" value="true"  data-bootstrap-switch>
+                                }
+                                <!-- /.card-body -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-4">
+                                <button type="button" class="btn btn-block btn-outline-info" disabled>Ekle</button>
+                            </div>
+                            <div class="col-4">
+                                <button type="submit" class="btn btn-block btn-outline-info">Güncelle</button>
+                            </div>
+                            <div class="col-4">
+                                <button onclick="Iptal()" type="button" class="btn btn-block btn-outline-info">İptal</button>
+                            </div>
+                        </div>
+                        <br />
+
+
+
+
+
+                    </div>
+
+                </div>
+                <!-- /.card -->
+            </div>
+        </form>
+    </div>
+
+
+    <script>
+        document.getElementById("kullaniciTur-"+@item.KullaniciID).value = @item.KullaniciTuru;
+        function AcKapa3(div) {
+            $(div).animate({
+                height: 'toggle'
+            });
+        }
+        function Iptal() {
+            $(".mainClass").hide();
+            $("#col_YeniKullanici").show();
+        }
+    </script>
+
+}
+

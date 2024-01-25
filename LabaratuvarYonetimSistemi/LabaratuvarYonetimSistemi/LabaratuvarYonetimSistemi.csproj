@@ -2738,6 +2738,9 @@
     <Content Include="Views\PageRequirement\Head.cshtml" />
     <Content Include="Views\PageRequirement\ToastModal.cshtml" />
     <Content Include="Views\PageRequirement\ToastModalScript.cshtml" />
+    <Content Include="Views\Kullanicilar\FormKullaniciDuzenle.cshtml" />
+    <Content Include="Views\Kullanicilar\IndexAra.cshtml" />
+    <Content Include="Views\Kullanicilar\TabloAra.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
